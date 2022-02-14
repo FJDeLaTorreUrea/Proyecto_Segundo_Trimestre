@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% block body %}
+    <section class="site-hero overlay" style="background-image: url({{asset('imagenes/fondo_pagina.jpg')}})" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="row site-hero-inner justify-content-center align-items-center">
+            <div class="col-md-10 text-center" data-aos="fade-up">
+                <span class="custom-caption text-uppercase text-white d-block  mb-3">Bienvenido al paraiso de 5 estrellas <span class="fa fa-star text-primary"></span></span>
+                <h1 class="heading">Iniciar Sesión</h1>
+            </div>
+            </div>
+        </div>
+
+        <a class="mouse smoothscroll" href="#next">
+            <div class="mouse-icon">
+            <span class="mouse-wheel"></span>
+            </div>
+        </a>
+        </section>
+        <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+            <div class="row">
+            <div class="col-md-3"></div>
+                <div class="col-md-4">
+                    <h1 class="h3 mb-3 font-weight-normal">Iniciar Sesión</h1>  
+                </div> 
+                <div class="col-md-4"></div> 
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 form-group">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                    {% if app.user %}
+                        <div class="mb-3">
+                            Ha iniciado sesión como {{ app.user.username }}, <a href="{{ path('app_logout') }}">Cerrar Sesión</a>
+                        </div>
+                    {% endif %}
+                  <label class="text-black font-weight-bold" for="name">Email</label>
+                  <input type="text" id="name" class="form-control ">
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 form-group">
+                  <label class="text-black font-weight-bold" for="phone">Contraseña</label>
+                  <input type="text" id="phone" class="form-control ">
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> Remember me
+                    </label>
+                </div>
+            </div>
+            
+            
+            
+            <div class="row">
+                <div class="col">
+                    <input type="hidden" name="_csrf_token"
+                    value="{{ csrf_token('authenticate') }}"
+                    >
+                </div>  
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-4">
+                    <button class="btn btn-lg btn-primary" type="submit">
+                        Iniciar Sesión
+                    </button>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            </form>
+
+
+
+{% endblock %}
