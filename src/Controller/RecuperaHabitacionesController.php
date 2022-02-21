@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Fotos;
+use App\Entity\Temporada;
 use App\Entity\Habitacion;
+use App\Entity\TipoHabitacion;
 use App\Repository\FotosRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Serializer\Serializer;
@@ -18,9 +20,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class RecuperaHabitacionesController extends AbstractController
 {
     /**
-     * @Route("/habitaciones/todas", name="habitaciones", methods={"GET"})
+     * @Route("/habitaciones/todas/{pagina}", name="habitaciones", methods={"GET"})
      */
-    public function getAll(ManagerRegistry $doctrine): Response
+    public function getAll(ManagerRegistry $doctrine,int $pagina): Response
     {
 
 
@@ -33,18 +35,23 @@ class RecuperaHabitacionesController extends AbstractController
         $entityM=$doctrine->getManager();
 
 
-        $fotos=$doctrine->getRepository(Fotos::class)->findAll();
+        $fotos=$doctrine->getRepository(Fotos::class)->obtenFotosPaginadas($pagina,4);
+        $habitacion=$doctrine->getRepository(Habitacion::class)->obtenHabitacionesPaginados($pagina,4);
+        $habitacion_paginas=$doctrine->getRepository(Habitacion::class)->cuentaHabitaciones();
+        $temporadas=$doctrine->getRepository(Temporada::class)->findAll();
+        $tipos=$doctrine->getRepository(TipoHabitacion::class)->findAll();
+        $contenido=[$fotos,$habitacion,$temporadas,$tipos,$habitacion_paginas];
         $encoder=new JsonEncoder;
         $defaultContext = [
             AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
-                return $object->getNHabitacion();
+                
                 
             },
         ];
         $normalizer = new ObjectNormalizer(null, null, null, null, null, null, $defaultContext);
 
         $serializer = new Serializer([$normalizer], [$encoder]);
-        return new Response($serializer->serialize($fotos, 'json'));
+        return new Response($serializer->serialize($contenido, 'json'),);
         // {"name":"Les-Tilleuls.coop","members":[{"name":"K\u00e9vin", organization: "Les-Tilleuls.coop"}]}
 
         
@@ -54,4 +61,43 @@ class RecuperaHabitacionesController extends AbstractController
         
        
     }
+
+
+    /**
+     * @Route("/habitaciones/paginadas", name="habitacionesPag")
+     */
+    public function getAl(ManagerRegistry $doctrine): Response
+    {
+
+
+
+
+
+
+
+
+        $entityM=$doctrine->getManager();
+
+
+        
+        $habitacion=$doctrine->getRepository(Habitacion::class)->obtenHabitacionesPaginados(1,4);
+        $habitacion_paginas=$doctrine->getRepository(Habitacion::class)->cuentaHabitaciones();
+        $fotos=$doctrine->getRepository(Fotos::class)->obtenFotosPaginadas(1,4);
+        $temporadas=$doctrine->getRepository(Temporada::class)->FindAll();
+        $contenedor=[$habitacion,$fotos,$temporadas,$habitacion_paginas];
+
+        
+       
+        return new Response(json_encode($contenedor));
+        // {"name":"Les-Tilleuls.coop","members":[{"name":"K\u00e9vin", organization: "Les-Tilleuls.coop"}]}
+
+        
+
+        
+
+        
+       
+    }
+
+
 }

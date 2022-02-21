@@ -19,6 +19,31 @@ class FotosRepository extends ServiceEntityRepository
         parent::__construct($registry, Fotos::class);
     }
 
+    public function obtenFotosPaginadas(int $pagina=1, int $filas=4)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $registros = array();
+        $sql = "SELECT * FROM Fotos;";
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+        $registros = $resultSet->fetchAll();
+        $n_total = count($registros);
+
+        $total = count($registros);
+        $paginas = ceil($total /$filas);
+        $registros = array();
+        if ($pagina <= $paginas)
+        {
+            $inicio = ($pagina-1) * $filas;
+            $sql = "SELECT * FROM Fotos limit $inicio, $filas";
+            $stmt = $conn->prepare($sql);
+            $resultSet = $stmt->executeQuery();
+            $registros = $resultSet->fetchAll(); 
+        }
+        return $registros;
+    }
+
     // /**
     //  * @return Fotos[] Returns an array of Fotos objects
     //  */

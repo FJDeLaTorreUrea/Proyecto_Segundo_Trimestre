@@ -120,11 +120,11 @@
           <div class="col-md-6 col-lg-4" data-aos="fade-up">
             <a href="#" class="room">
               <figure class="img-wrap">
-                <img src="{{asset('imagenes/img_1.jpg')}}" alt="Free website template" class="img-fluid mb-3">
+                <div id="contenimagen0"></div>
               </figure>
               <div class="p-3 text-center room-info">
-                <h2>Habitacion pequeña  de una sola cama</h2>
-                <span class="text-uppercase letter-spacing-1">90€ / noche</span>
+                <h2 id="tipo0"></h2>
+                
               </div>
             </a>
           </div>
@@ -132,11 +132,10 @@
           <div class="col-md-6 col-lg-4" data-aos="fade-up">
             <a href="#" class="room">
               <figure class="img-wrap">
-                <img src="{{asset('imagenes/img_2.jpg')}}" alt="Free website template" class="img-fluid mb-3">
+                <div id="contenimagen1"></div>
               </figure>
               <div class="p-3 text-center room-info">
-                <h2>Habitacion grande con dos camas</h2>
-                <span class="text-uppercase letter-spacing-1">120€ / noche</span>
+                <h2 id="tipo1"></h2>
               </div>
             </a>
           </div>
@@ -144,11 +143,11 @@
           <div class="col-md-6 col-lg-4" data-aos="fade-up">
             <a href="#" class="room">
               <figure class="img-wrap">
-                <img src="{{asset('imagenes/img_3.jpg')}}" alt="Free website template" class="img-fluid mb-3">
+                  <div id="contenimagen3"></div>
               </figure>
               <div class="p-3 text-center room-info">
-                <h2>Suite</h2>
-                <span class="text-uppercase letter-spacing-1">350€ / por noche</span>
+                <h2 id="tipo3"></h2>
+                
               </div>
             </a>
           </div>
@@ -328,4 +327,10 @@
 </body>
 {% endblock %}
 {% block footer %}{{parent()}}{% endblock %}
+
+{% block javascripts %}
+  {{parent()}}
+  <script src="{{asset('js/MuestraHabitaciones.js')}}"></script>
+{% endblock %}
+
 

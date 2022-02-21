@@ -22,112 +22,100 @@
     <!-- END section -->
 
 
-    {{form_start(form)}}
-        {{form_row(form.Habitacion)}}
-        {{form_row(form.Fecha_Inicio)}}
+    
+        
+        {# {{form_row(form.Fecha_Inicio)}}
         {{form_row(form.Fecha_Fin)}}
         {{form_row(form.Adultos)}}
         {{form_row(form.Menores)}}
-        {{form_row(form.Email)}}
-        {{form_row(form.Nombre)}}
-        {{form_row(form.Apellidos)}}
-        {{form_row(form.Fecha_Nacimiento)}}
-        {{form_row(form.Nacionalidad)}}
-        {{form_row(form.Direccion)}}
-        {{form_row(form.Telefono)}}
         {{form_row(form.Desayuno)}}
         {{form_row(form.Comida)}}
         {{form_row(form.Cena)}}
         {{form_row(form.Gim_Spa)}}
-    {{form_end(form)}}
+    {{form_end(form)}} #}
     
     <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
+            {{form_start(form, {'attr':{'class':'bg-white p-md-5 p-4 mb-5 border'}})}}
             
-            <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="name">Name</label>
-                  <input type="text" id="name" class="form-control ">
+                  <label class="text-black font-weight-bold" for="name">Numero de Habitacion:</label>
+                  {{form_label(form.Habitacion," ")}}
+                  {{form_widget(form.Habitacion,{'attr':{'class':'form-control'}})}}
                 </div>
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="phone">Phone</label>
+                  <label class="text-black font-weight-bold" for="phone">Tipo:</label>
                   <input type="text" id="phone" class="form-control ">
                 </div>
               </div>
           
               <div class="row">
-                <div class="col-md-12 form-group">
-                  <label class="text-black font-weight-bold" for="email">Email</label>
-                  <input type="email" id="email" class="form-control ">
-                </div>
-              </div>
-
-              <div class="row">
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="checkin_date">Date Check In</label>
-                  <input type="text" id="checkin_date" class="form-control">
+                  <label class="text-black font-weight-bold" for="email">Fecha de Inicio:</label>
+                  {{form_label(form.Fecha_Inicio," ")}}
+                  {{form_widget(form.Fecha_Inicio,{'attr':{'class':'calendario'}})}}
                 </div>
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="checkout_date">Date Check Out</label>
-                  <input type="text" id="checkout_date" class="form-control">
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <label for="adults" class="font-weight-bold text-black">Adults</label>
-                  <div class="field-icon-wrap">
-                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                    <select name="" id="adults" class="form-control">
-                      <option value="">1</option>
-                      <option value="">2</option>
-                      <option value="">3</option>
-                      <option value="">4+</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 form-group">
-                  <label for="children" class="font-weight-bold text-black">Children</label>
-                  <div class="field-icon-wrap">
-                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                    <select name="" id="children" class="form-control">
-                      <option value="">1</option>
-                      <option value="">2</option>
-                      <option value="">3</option>
-                      <option value="">4+</option>
-                    </select>
-                  </div>
+                  <label class="text-black font-weight-bold" for="email">Fecha  de Salida:</label>
+                  {{form_label(form.Fecha_Fin," ")}}
+                  {{form_widget(form.Fecha_Fin,{'attr':{'class':'calendario'}})}}
                 </div>
               </div>
 
               
 
-              <div class="row mb-4">
-                <div class="col-md-12 form-group">
-                  <label class="text-black font-weight-bold" for="message">Notes</label>
-                  <textarea name="message" id="message" class="form-control " cols="30" rows="8"></textarea>
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="adults" class="font-weight-bold text-black">Adultos</label>
+                  {{form_label(form.Adultos," ")}}
+                  {{form_widget(form.Adultos,{'attr':{'class':'form-control'}})}}
+                  
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="children" class="font-weight-bold text-black">Niños</label>
+                  {{form_label(form.Menores," ")}}
+                  {{form_widget(form.Menores,{'attr':{'class':'form-control'}})}}
                 </div>
               </div>
+
+
+              <div class="row">
+                <div class="form-check col-md-3">
+                
+                  {{form_row(form.Desayuno,{'attr':{'class':'form-check-input col-md-3'}})}}
+                 
+                  
+                </div>
+                <div class="form-check col-md-3">
+                      {{form_row(form.Comida,{'attr':{'class':'form-check-input col-md-3'}})}}
+                  
+                </div>
+                <div class="form-check col-md-3">
+                      {{form_row(form.Cena,{'attr':{'class':'form-check-input col-md-3'}})}}
+                </div>
+                <div class="form-check col-md-3">
+                      {{form_row(form.Gim_Spa,{'attr':{'class':'form-check-input col-md-3'}})}}
+                </div>
+                
+              </div>
+
+
+
+              
+
+              
               <div class="row">
                 <div class="col-md-6 form-group">
                   <input type="submit" value="Reserve Now" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
                 </div>
               </div>
-            </form>
+            {{form_end(form)}}
 
           </div>
-          <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
-            <div class="row">
-              <div class="col-md-10 ml-auto contact-info">
-                <p><span class="d-block">Dirección:</span> <span class="text-black"> Calle Francisco Villalon , 29660 Marbella (Puerto Banus), Málaga</span></p>
-                <p><span class="d-block">Teléfono:</span> <span class="text-black"> (+34) 953 27 85 10</span></p>
-                <p><span class="d-block">Email:</span> <span class="text-black"> HotelRoyalPalace@gmail.com</span></p>
-              </div>
-            </div>
-          </div>
+         
         </div>
       </div>
     </section>
@@ -137,4 +125,8 @@
     
     
     
+{% endblock %}
+{% block javascripts%}
+{{parent()}}
+<script src="{{asset('js/configurar_fecha.js')}}"></script>
 {% endblock %}

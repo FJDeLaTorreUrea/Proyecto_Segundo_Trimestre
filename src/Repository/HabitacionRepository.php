@@ -19,6 +19,53 @@ class HabitacionRepository extends ServiceEntityRepository
         parent::__construct($registry, Habitacion::class);
     }
 
+
+
+    public function cuentaHabitaciones()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $registros=array();
+        $sql="SELECT * FROM Habitacion;";
+        $stmt=$conn->prepare($sql);
+        $resultSet=$stmt->executeQuery();
+        $registros=$resultSet->fetchAll();
+        $numero_total=count($registros);
+
+
+        $paginas=ceil($numero_total/4);
+
+        return "Paginas:".$paginas;
+
+
+
+    }
+
+    public function obtenHabitacionesPaginados(int $pagina=1, int $filas=4)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $registros = array();
+        $sql = "SELECT * FROM Habitacion;";
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+        $registros = $resultSet->fetchAll();
+        $n_total = count($registros);
+
+        $total = count($registros);
+        $paginas = ceil($total /$filas);
+        $registros = array();
+        if ($pagina <= $paginas)
+        {
+            $inicio = ($pagina-1) * $filas;
+            $sql = "SELECT * FROM Habitacion limit $inicio, $filas";
+            $stmt = $conn->prepare($sql);
+            $resultSet = $stmt->executeQuery();
+            $registros = $resultSet->fetchAll(); 
+        }
+        return $registros;
+    }
+
     // /**
     //  * @return Habitacion[] Returns an array of Habitacion objects
     //  */

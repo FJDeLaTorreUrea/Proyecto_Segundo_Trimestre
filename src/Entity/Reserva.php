@@ -32,41 +32,7 @@ class Reserva
      */
     private $Fecha_Fin;
 
-    /**
-     * @ORM\Column(type="string", length=70)
-     */
-    private $Nombre;
-
-    /**
-     * @ORM\Column(type="string", length=90)
-     */
-    private $Apellidos;
-
-    /**
-     * @ORM\Column(type="string", length=20)
-     */
-    private $Telefono;
-
-    /**
-     * @ORM\Column(type="string", length=60)
-     */
-    private $Email;
-
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $Fecha_Nacimiento;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Nacionalidad::class, inversedBy="reservas")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Nacionalidad;
-
-    /**
-     * @ORM\Column(type="string", length=70)
-     */
-    private $Direccion;
+    
 
     /**
      * @ORM\OneToOne(targetEntity=Habitacion::class, inversedBy="reserva", cascade={"persist", "remove"})
@@ -155,89 +121,7 @@ class Reserva
         return $this;
     }
 
-    public function getNombre(): ?string
-    {
-        return $this->Nombre;
-    }
-
-    public function setNombre(string $Nombre): self
-    {
-        $this->Nombre = $Nombre;
-
-        return $this;
-    }
-
-    public function getApellidos(): ?string
-    {
-        return $this->Apellidos;
-    }
-
-    public function setApellidos(string $Apellidos): self
-    {
-        $this->Apellidos = $Apellidos;
-
-        return $this;
-    }
-
-    public function getTelefono(): ?string
-    {
-        return $this->Telefono;
-    }
-
-    public function setTelefono(string $Telefono): self
-    {
-        $this->Telefono = $Telefono;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->Email;
-    }
-
-    public function setEmail(string $Email): self
-    {
-        $this->Email = $Email;
-
-        return $this;
-    }
-
-    public function getFechaNacimiento(): ?\DateTimeInterface
-    {
-        return $this->Fecha_Nacimiento;
-    }
-
-    public function setFechaNacimiento(\DateTimeInterface $Fecha_Nacimiento): self
-    {
-        $this->Fecha_Nacimiento = $Fecha_Nacimiento;
-
-        return $this;
-    }
-
-    public function getNacionalidad(): ?Nacionalidad
-    {
-        return $this->Nacionalidad;
-    }
-
-    public function setNacionalidad(?Nacionalidad $Nacionalidad): self
-    {
-        $this->Nacionalidad = $Nacionalidad;
-
-        return $this;
-    }
-
-    public function getDireccion(): ?string
-    {
-        return $this->Direccion;
-    }
-
-    public function setDireccion(string $Direccion): self
-    {
-        $this->Direccion = $Direccion;
-
-        return $this;
-    }
+    
 
     public function getHabitacion(): ?Habitacion
     {

@@ -46,17 +46,17 @@ class Habitacion
     /**
      * @ORM\Column(type="float")
      */
-    private $Precio_Temporada_alta;
+    private $Temporada_alta;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $Precio_Temporada_Media;
+    private $Temporada_Media;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $Precio_Temporada_Baja;
+    private $Temporada_Baja;
 
     /**
      * @ORM\OneToOne(targetEntity=Reserva::class, mappedBy="Habitacion", cascade={"persist", "remove"})
@@ -135,36 +135,36 @@ class Habitacion
 
     public function getPrecioTemporadaAlta(): ?float
     {
-        return $this->Precio_Temporada_alta;
+        return $this->Temporada_alta;
     }
 
-    public function setPrecioTemporadaAlta(float $Precio_Temporada_alta): self
+    public function setPrecioTemporadaAlta(float $Temporada_alta): self
     {
-        $this->Precio_Temporada_alta = $Precio_Temporada_alta;
+        $this->Temporada_alta = $Temporada_alta;
 
         return $this;
     }
 
     public function getPrecioTemporadaMedia(): ?float
     {
-        return $this->Precio_Temporada_Media;
+        return $this->Temporada_Media;
     }
 
-    public function setPrecioTemporadaMedia(float $Precio_Temporada_Media): self
+    public function setPrecioTemporadaMedia(float $Temporada_Media): self
     {
-        $this->Precio_Temporada_Media = $Precio_Temporada_Media;
+        $this->Temporada_Media = $Temporada_Media;
 
         return $this;
     }
 
     public function getPrecioTemporadaBaja(): ?float
     {
-        return $this->Precio_Temporada_Baja;
+        return $this->Temporada_Baja;
     }
 
-    public function setPrecioTemporadaBaja(float $Precio_Temporada_Baja): self
+    public function setPrecioTemporadaBaja(float $Temporada_Baja): self
     {
-        $this->Precio_Temporada_Baja = $Precio_Temporada_Baja;
+        $this->Temporada_Baja = $Temporada_Baja;
 
         return $this;
     }

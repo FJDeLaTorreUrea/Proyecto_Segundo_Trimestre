@@ -6,6 +6,7 @@ use App\Entity\Reserva;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class ReservaType extends AbstractType
 {
@@ -13,21 +14,22 @@ class ReservaType extends AbstractType
     {
         $builder
             
-            ->add('Fecha_Inicio')
-            ->add('Fecha_Fin')
-            ->add('Nombre')
-            ->add('Apellidos')
-            ->add('Telefono')
-            ->add('Email')
-            ->add('Fecha_Nacimiento')
-            ->add('Direccion')
+            ->add('Fecha_Inicio', DateType::class,[
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => ['class' => 'calendar'],
+            ])
+            ->add('Fecha_Fin', DateType::class,[
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => ['class' => 'calendar'],
+            ])
             ->add('Desayuno')
             ->add('Comida')
             ->add('Cena')
             ->add('Gim_Spa')
             ->add('Adultos')
             ->add('Menores')
-            ->add('Nacionalidad')
             ->add('Habitacion')
             //->add('Fecha_Reserva')
             //->add('Precio_Final')
