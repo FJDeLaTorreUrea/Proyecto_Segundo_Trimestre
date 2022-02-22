@@ -7,11 +7,23 @@
         function pintaPaginador()
         {
             
-
-            $.getJSON("/habitaciones/todas/1",function(data)
-           {
-               debugger;
-               var paginas=data[4].substr(-1);
+            $.ajax({
+                dataType:"json",
+                type:"get",
+                url:"/habitaciones/todas/1",
+                data:"",
+                beforeSend:function()
+                {
+                    $("#spinner").css({
+                        "display":"block"
+                    })
+                },
+                success: function(data)
+                {
+                    $("#spinner").css({
+                        "display":"none"
+                    })
+                    var paginas=data[4].substr(-1);
                
                for(let i=0;i<paginas;i++)
             {
@@ -132,10 +144,9 @@
                     
                                 
                             }
-
-                            
-        
-        }) 
+                }
+            })
+            
             
         }
         pintaPaginador();
@@ -150,13 +161,28 @@
             
             
                     $("#paginador").attr("pagina",$(this).text())
-                    console.log("/habitaciones/todas/"+$("#paginador").attr("pagina"))
-                    $.getJSON("/habitaciones/todas/"+$("#paginador").attr("pagina"),function(data){
-                        $("#contenedor_habitaciones").children().remove();
-                
-                        
-                        
-                        for(let i=0;i<data[1].length;i++)
+                    $.ajax({
+                        dataType:"json",
+                        type:"get",
+                        url:"/habitaciones/todas/"+$("#paginador").attr("pagina"),
+                        data:"",
+                        beforeSend: function()
+                        {
+                            
+                            $("#spinner").css({
+                                "display":"block"
+                            })
+                            $("#contenedor_habitaciones").children().remove();
+                        },
+                        success: function(data)
+                        {
+                            
+                            $("#spinner").css({
+                                "display":"none"
+                            })
+                            
+                            
+                            for(let i=0;i<data[1].length;i++)
                         {
                             let contenedor=$("#contenedor_habitaciones");
                             let fila=$("<div class='row'></div>");
@@ -246,15 +272,12 @@
                 
                             
                         }
-                
-                        
-                        
-                        
-                        
-                        
-                
-                
+                        }
+
+
+
                     })
+                    
 
                     $('html, body').animate({
                         scrollTop: $("#next").offset().top

@@ -18,7 +18,7 @@ $(document).ready(function(){
     $.ajax({
         dataType: "json",
         type:"get",
-        url: "/habitaciones/todas/",
+        url: "/habitaciones/todas/1",
         data: "",
         beforeSend: function()
         {
@@ -38,11 +38,11 @@ $(document).ready(function(){
             {
                 $("#contenimagen"+i).css({
                     "position":"relative",
-                    "background-image":"url('imagenes/"+data[0][i].Nombre+"')",
+                    "background-image":"url('imagenes/"+data[0][i].nombre+"')",
                     "width":"1000px",
                     "height":"360px"
                 })
-                $("#tipo"+i).text(data[1][i].tipo.nombre);
+                $("#tipo"+i).text(data[3][i].Nombre);
             }
         }
 

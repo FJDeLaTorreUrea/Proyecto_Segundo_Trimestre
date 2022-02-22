@@ -2,6 +2,13 @@
 
 {% block title %}Inicio{% endblock %}
 
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{asset('css/video_modal.css')}}">
+{% endblock %}
+
+
 {% block header %}
   {{ parent() }}
 {% endblock %}
@@ -28,6 +35,24 @@
     </section>
     <!-- END section -->
 
+<div class="modal" id="modalVideo">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4>Hotel Royal Palace</h4>
+                    
+                  </div>
+                  <div class="modal-body">
+                    <video id="video_de_hotel" autoplay="" width="100%" heigth="auto" controls="">
+                      <source  src="{{asset('Videos/Video_hotel.mp4')}}" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="genric-btn primary-border circle arrow" id="cierra_modal" data-dimiss="modal">Cerrar</button>
+                  </div>
+                </div>              
+              </div>
+            </div>
     <section class="section bg-light pb-0"  >
       <div class="container">
        
@@ -102,11 +127,28 @@
           <div class="col-md-12 col-lg-4 order-lg-1" data-aos="fade-up">
             <h2 class="heading">Bienvenido</h2>
             <p class="mb-4">El Hotel Royal Palace abrió sus puertas hace mas de 30 años en el pueblo de Marbella, enfocado unicamente a la nata y la crema de la sociedad, hoy en dia el hotel ha sido remodelado y enfocado mas ampliamente paraa que todos, independientemente de su situación,puedan disfrutar de unas vacaciones de 5 estrellas en La Costa Del Sol</p>
-            </div>
+            <button type="button" class="btn btn-primary btn-block text-white" id="muestra_video">Ver video promocional</button>
+
+
+
+            
+
+
           
-        </div>
-      </div>
-    </section>
+          </div>
+
+    </div>
+  </div>
+</div> 
+  
+  
+  
+
+               
+           
+            
+          
+    
 
     <section class="section">
       <div class="container">
@@ -331,6 +373,7 @@
 {% block javascripts %}
   {{parent()}}
   <script src="{{asset('js/MuestraHabitaciones.js')}}"></script>
+  <script src="{{asset('js/video_modal.js')}}"></script>
 {% endblock %}
 
 
