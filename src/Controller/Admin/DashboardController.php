@@ -50,12 +50,12 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Inicio', 'fa fa-home');
-        yield MenuItem::linkToCrud('Tipo', 'fa fa-list',TipoHabitacion::class);
-        yield MenuItem::linkToCrud('Fotos', 'fa fa-list',Fotos::class);
-        yield MenuItem::linkToCrud('Habitacion', 'fa fa-list',Habitacion::class);
-        yield MenuItem::linkToCrud('Nacionalidad', 'fa fa-list',Nacionalidad::class);
-        yield MenuItem::linkToCrud('Reservas', 'fa fa-list',Reserva::class);
-        yield MenuItem::linkToCrud('Temporadas', 'fa fa-list',Temporada::class);
-        yield MenuItem::linkToCrud('Usuarios', 'fa fa-list',Usuario::class);
+        yield MenuItem::linkToCrud('Tipo', 'fa fa-star',TipoHabitacion::class);
+        yield MenuItem::linkToCrud('Fotos', 'fa fa-camera',Fotos::class);
+        yield MenuItem::linkToCrud('Habitacion', 'fa fa-bed',Habitacion::class);
+        yield MenuItem::linkToCrud('Nacionalidad', 'fa fa-flag',Nacionalidad::class);
+        yield MenuItem::linkToCrud('Reservas', 'fa fa-bell',Reserva::class);
+        yield MenuItem::linkToCrud('Temporadas', 'fa fa-calendar',Temporada::class);
+        yield MenuItem::linkToCrud('Usuarios', 'fa fa-users',Usuario::class);
     }
 }

@@ -1,17 +1,25 @@
-
-
     $(document).ready(function (){
         //console.log("/habitaciones/todas/"+definePagina());
-        
-        
-        function pintaPaginador()
+        $("#Comprobar").on("click",function(ev)
         {
-            
+            ev.preventDefault();
+            var fecha_inicio=$(".calendario1").val();
+            var fecha_fin=$(".calendario2").val();
+            var adultos=$("#adultos option:selected").text();
+            var menores=$("#menores option:selected").text();
+            var tipo=$("#select_tipo_habitaciones option:selected").text();
+
+            var form = new FormData();
+            form.append("fecha_inicio",fecha_inicio);
+            form.append("fecha_fin",fecha_fin);
+            form.append("pagina",$("#paginador").attr("pagina"));
             $.ajax({
                 dataType:"json",
-                type:"get",
-                url:"/habitaciones/todas/1",
-                data:"",
+                type:"POST",
+                url:"/habitaciones/todas/",
+                data:form,
+                contentType:false,
+                processData:false,
                 beforeSend:function()
                 {
                     $("#spinner").css({
@@ -20,6 +28,7 @@
                 },
                 success: function(data)
                 {
+                    debugger;
                     $("#spinner").css({
                         "display":"none"
                     })
@@ -147,25 +156,31 @@
                 }
             })
             
-            
-        }
-        pintaPaginador();
+
+
+        })        
+        
+        
+       
         
         
 
             
         $(document.body).on("click",".numero_pagina",function()
         {
-
+            var form = new FormData();
+            form.append("fecha_inicio",fecha_inicio);
+            form.append("fecha_fin",fecha_fin);
+            form.append("pagina",$("#paginador").attr("pagina"));
 
             
             
                     $("#paginador").attr("pagina",$(this).text())
                     $.ajax({
                         dataType:"json",
-                        type:"get",
-                        url:"/habitaciones/todas/"+$("#paginador").attr("pagina"),
-                        data:"",
+                        type:"POST",
+                        url:"/habitaciones/todas/",
+                        data:form,
                         beforeSend: function()
                         {
                             

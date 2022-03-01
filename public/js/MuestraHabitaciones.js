@@ -1,14 +1,4 @@
 
-console.log("hola");
-
-
-
-
-
-
-
-
-
 $.ajax({
 
 })

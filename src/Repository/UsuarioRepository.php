@@ -36,6 +36,15 @@ class UsuarioRepository extends ServiceEntityRepository implements PasswordUpgra
         $this->_em->flush();
     }
 
+
+
+
+
+
+
+
+    
+
     // /**
     //  * @return Usuario[] Returns an array of Usuario objects
     //  */

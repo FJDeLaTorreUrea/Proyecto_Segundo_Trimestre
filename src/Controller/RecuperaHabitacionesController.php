@@ -9,6 +9,7 @@ use App\Entity\TipoHabitacion;
 use App\Repository\FotosRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,14 +21,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class RecuperaHabitacionesController extends AbstractController
 {
     /**
-     * @Route("/habitaciones/todas/{pagina}", name="habitaciones", methods={"GET"})
+     * @Route("/habitaciones/todas/", name="habitaciones", methods={"GET"})
      */
-    public function getAll(ManagerRegistry $doctrine,int $pagina): Response
+    public function getAll(ManagerRegistry $doctrine,Request $request): Response
     {
-
-
-
-
+        $request = Request::createFromGlobals();
+        $fecha_inicio=$request->request->get('fecha_inicio');
+        $fecha_fin=$request->request->get('fecha_fin');
+        $pagina=$request->request->get('pagina');
+    
 
 
 
@@ -35,8 +37,8 @@ class RecuperaHabitacionesController extends AbstractController
         $entityM=$doctrine->getManager();
 
 
-        $fotos=$doctrine->getRepository(Fotos::class)->obtenFotosPaginadas($pagina,4);
-        $habitacion=$doctrine->getRepository(Habitacion::class)->obtenHabitacionesPaginados($pagina,4);
+        $fotos=$doctrine->getRepository(Fotos::class)->obtenFotosPaginadas($pagina-0,4);
+        $habitacion=$doctrine->getRepository(Habitacion::class)->obtenHabitacionesPaginados($pagina-0,4,$fecha_inicio,$fecha_fin);
         $habitacion_paginas=$doctrine->getRepository(Habitacion::class)->cuentaHabitaciones();
         $temporadas=$doctrine->getRepository(Temporada::class)->findAll();
         $tipos=$doctrine->getRepository(TipoHabitacion::class)->findAll();

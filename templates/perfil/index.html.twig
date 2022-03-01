@@ -1,20 +1,82 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PerfilController!{% endblock %}
+{% block title %}Mi Perfil{% endblock %}
+
+{% block stylesheets %}
+{{parent()}}
+<link rel="stylesheet" href="{{asset('css/datatables.min.css')}}">
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <section class="site-hero inner-page overlay" style="background-image: url(imagenes/hero_4.jpg)" data-stellar-background-ratio="0.5">
+      <div class="container">
+        <div class="row site-hero-inner justify-content-center align-items-center">
+          <div class="col-md-10 text-center" data-aos="fade">
+            <h1 class="heading mb-3">Mi perfil</h1>
+            
+          </div>
+        </div>
+      </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+      <a class="mouse smoothscroll" href="#next">
+        <div class="mouse-icon">
+          <span class="mouse-wheel"></span>
+        </div>
+      </a>
+    </section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/Proyecto_Segundo_Trimestre/src/Controller/PerfilController.php'|file_link(0) }}">src/Controller/PerfilController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/Proyecto_Segundo_Trimestre/templates/perfil/index.html.twig'|file_link(0) }}">templates/perfil/index.html.twig</a></code></li>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/perfil">Mi Perfil</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/perfil/datos/personales">Datos personales <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Mis Reservas</a>
+      </li>
+      
+      {# <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li> #}
     </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12"></div>
+  </div>
 </div>
+
+<div class="container bg-light">
+  <table id="tabla">
+    <thead>
+      <th>Email</th>
+      <th>Nombre</th>
+      <th>Apellidos</th>
+    </thead>
+    <tbody>
+      <th>{{app.user.Email}}</th>
+      <th>{{app.user.Nombre}}</th>
+      <th>{{app.user.Apellidos}}</th>
+    </body>
+  </table>
+  
+  
+</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+  {{parent()}}
+  <script src="{{asset('js/tablas.js')}}"></script>
+  <script src="{{asset('js/datatables.min.js')}}"></script>
 {% endblock %}
