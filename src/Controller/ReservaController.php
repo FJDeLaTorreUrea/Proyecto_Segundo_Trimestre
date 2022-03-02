@@ -12,10 +12,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ReservaController extends AbstractController
 {
     /**
-     * @Route("/reserva", name="reserva")
+     * @Route("/reserva/{id}", name="reserva")
      */
-    public function index(Request $request): Response
+    public function index(Request $request,$id): Response
     {
+        echo $id;
         $reserva=new Reserva();
         $form=$this->createForm(ReservaType::class,$reserva);
         $form->handleRequest($request);

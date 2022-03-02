@@ -36,7 +36,7 @@ class FotosRepository extends ServiceEntityRepository
         if ($pagina <= $paginas)
         {
             $inicio = ($pagina-1) * $filas;
-            $sql = "SELECT * FROM Fotos limit $inicio, $filas";
+            $sql = "SELECT Nombre,habitacion.n_habitacion FROM fotos INNER JOIN habitacion ON habitacion.id=fotos.habitacion_id LIMIT $inicio, $filas; ";
             $stmt = $conn->prepare($sql);
             $resultSet = $stmt->executeQuery();
             $registros = $resultSet->fetchAll(); 

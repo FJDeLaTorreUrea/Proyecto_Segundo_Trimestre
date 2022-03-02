@@ -8,7 +8,7 @@ $(document).ready(function(){
     $.ajax({
         dataType: "json",
         type:"get",
-        url: "/habitaciones/todas/1",
+        url: "/habitaciones/todas/",
         data: "",
         beforeSend: function()
         {

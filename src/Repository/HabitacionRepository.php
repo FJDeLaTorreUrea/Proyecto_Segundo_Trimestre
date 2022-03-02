@@ -21,12 +21,31 @@ class HabitacionRepository extends ServiceEntityRepository
 
 
 
-    public function cuentaHabitaciones($fecha_inicio,$fecha_fin)
+    public function cuentaHabitaciones($fecha_inicio,$fecha_fin,$adultos,$menores,$tipo)
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $registros=array();
-        $sql="SELECT n_habitacion,adultos,menores,descripcion,camas,temporada_alta,temporada_media,temporada_baja FROM( SELECT n_habitacion,adultos,menores,descripcion,camas,temporada_alta,temporada_media,temporada_baja FROM habitacion INNER JOIN tipo_habitacion ON habitacion.tipo_id = tipo_habitacion.id WHERE habitacion.id NOT IN(SELECT habitacion_id FROM reserva) UNION SELECT habitacion.n_habitacion , habitacion.adultos,habitacion.menores,habitacion.descripcion,habitacion.camas,habitacion.temporada_alta,habitacion.temporada_media,habitacion.temporada_baja FROM reserva INNER JOIN habitacion ON habitacion.id = reserva.habitacion_id WHERE fecha_inicio>'${fecha_inicio}' OR fecha_fin<'${fecha_fin}')a ;";
+        $sql="SELECT n_habitacion,adultos,menores,descripcion,camas,temporada_alta,temporada_media,temporada_baja 
+            FROM(
+                 SELECT n_habitacion,adultos,menores,descripcion,camas,temporada_alta,temporada_media,temporada_baja 
+                 FROM habitacion 
+                 INNER JOIN tipo_habitacion ON habitacion.tipo_id = tipo_habitacion.id 
+                 WHERE habitacion.id NOT IN(
+                                            SELECT habitacion_id 
+                                            FROM reserva)
+                    AND adultos='${adultos}'
+                    AND menores='${menores}'
+                    AND tipo_habitacion.nombre='${tipo}' 
+            UNION 
+            
+            SELECT habitacion.n_habitacion , habitacion.adultos,habitacion.menores,habitacion.descripcion,habitacion.camas,habitacion.temporada_alta,habitacion.temporada_media,habitacion.temporada_baja 
+            FROM reserva 
+            INNER JOIN habitacion ON habitacion.id = reserva.habitacion_id 
+            WHERE fecha_inicio>'${fecha_inicio}' OR fecha_fin<'${fecha_fin}' )a 
+        
+            ";
+        
         $stmt=$conn->prepare($sql);
         $resultSet=$stmt->executeQuery();
         $registros=$resultSet->fetchAll();
@@ -41,12 +60,28 @@ class HabitacionRepository extends ServiceEntityRepository
 
     }
 
-    public function obtenHabitacionesPaginados(int $pagina=1, int $filas=4,$fecha_inicio,$fecha_fin)
+    public function obtenHabitacionesPaginados(int $pagina=1, int $filas=4,$fecha_inicio,$fecha_fin,$adultos,$menores,$tipo)
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $registros = array();
-        $sql = "SELECT n_habitacion,adultos,menores,descripcion,camas,temporada_alta,temporada_media,temporada_baja FROM( SELECT n_habitacion,adultos,menores,descripcion,camas,temporada_alta,temporada_media,temporada_baja FROM habitacion INNER JOIN tipo_habitacion ON habitacion.tipo_id = tipo_habitacion.id WHERE habitacion.id NOT IN(SELECT habitacion_id FROM reserva) UNION SELECT habitacion.n_habitacion , habitacion.adultos,habitacion.menores,habitacion.descripcion,habitacion.camas,habitacion.temporada_alta,habitacion.temporada_media,habitacion.temporada_baja FROM reserva INNER JOIN habitacion ON habitacion.id = reserva.habitacion_id WHERE fecha_inicio>'${fecha_inicio}' OR fecha_fin<'${fecha_fin}')a ;";
+        $sql = "SELECT n_habitacion,adultos,menores,descripcion,camas,temporada_alta,temporada_media,temporada_baja 
+        FROM(
+             SELECT n_habitacion,adultos,menores,descripcion,camas,temporada_alta,temporada_media,temporada_baja 
+             FROM habitacion 
+             INNER JOIN tipo_habitacion ON habitacion.tipo_id = tipo_habitacion.id 
+             WHERE habitacion.id NOT IN(
+                                        SELECT habitacion_id 
+                                        FROM reserva)
+                AND adultos='${adultos}'
+                AND menores='${menores}'
+                AND tipo_habitacion.nombre='${tipo}' 
+        UNION 
+        
+        SELECT habitacion.n_habitacion , habitacion.adultos,habitacion.menores,habitacion.descripcion,habitacion.camas,habitacion.temporada_alta,habitacion.temporada_media,habitacion.temporada_baja 
+        FROM reserva 
+        INNER JOIN habitacion ON habitacion.id = reserva.habitacion_id 
+        WHERE fecha_inicio>'${fecha_inicio}' OR fecha_fin<'${fecha_fin}' )a ";
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery();
         $registros = $resultSet->fetchAll();
@@ -58,7 +93,25 @@ class HabitacionRepository extends ServiceEntityRepository
         if ($pagina <= $paginas)
         {
             $inicio = ($pagina-1) * $filas;
-            $sql = "SELECT n_habitacion,adultos,menores,descripcion,camas,temporada_alta,temporada_media,temporada_baja FROM( SELECT n_habitacion,adultos,menores,descripcion,camas,temporada_alta,temporada_media,temporada_baja FROM habitacion INNER JOIN tipo_habitacion ON habitacion.tipo_id = tipo_habitacion.id WHERE habitacion.id NOT IN(SELECT habitacion_id FROM reserva) UNION SELECT habitacion.n_habitacion , habitacion.adultos,habitacion.menores,habitacion.descripcion,habitacion.camas,habitacion.temporada_alta,habitacion.temporada_media,habitacion.temporada_baja FROM reserva INNER JOIN habitacion ON habitacion.id = reserva.habitacion_id WHERE fecha_inicio>'${fecha_inicio}' OR fecha_fin<'${fecha_fin}')a LIMIT $inicio, $filas;";
+            $sql = "SELECT n_habitacion,adultos,menores,descripcion,camas,temporada_alta,temporada_media,temporada_baja 
+            FROM(
+                 SELECT n_habitacion,adultos,menores,descripcion,camas,temporada_alta,temporada_media,temporada_baja 
+                 FROM habitacion 
+                 INNER JOIN tipo_habitacion ON habitacion.tipo_id = tipo_habitacion.id 
+                 WHERE habitacion.id NOT IN(
+                                            SELECT habitacion_id 
+                                            FROM reserva)
+                    AND adultos='${adultos}'
+                    AND menores='${menores}'
+                    AND tipo_habitacion.nombre='${tipo}' 
+            UNION 
+            
+            SELECT habitacion.n_habitacion , habitacion.adultos,habitacion.menores,habitacion.descripcion,habitacion.camas,habitacion.temporada_alta,habitacion.temporada_media,habitacion.temporada_baja 
+            FROM reserva 
+            INNER JOIN habitacion ON habitacion.id = reserva.habitacion_id 
+            WHERE fecha_inicio>'${fecha_inicio}' OR fecha_fin<'${fecha_fin}' )a 
+            ORDER BY n_habitacion 
+            LIMIT 0,4";
             $stmt = $conn->prepare($sql);
             $resultSet = $stmt->executeQuery();
             $registros = $resultSet->fetchAll(); 

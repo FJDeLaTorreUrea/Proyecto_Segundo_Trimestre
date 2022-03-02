@@ -1,9 +1,11 @@
 $(document).ready(function()
 {
+    debugger
     $.ajax({
         dataType:"json",
         type:"get",
         url:"/recupera/tipos/habitaciones",
+        
         success:function(data)
         {
             for(let i=0;i<data[0].length;i++)
