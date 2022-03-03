@@ -24,10 +24,7 @@ class ReservaType extends AbstractType
                 'html5' => false,
                 'attr' => ['class' => 'calendar'],
             ])
-            ->add('Desayuno')
-            ->add('Comida')
-            ->add('Cena')
-            ->add('Gim_Spa')
+           
             ->add('Adultos')
             ->add('Menores')
             ->add('Habitacion')

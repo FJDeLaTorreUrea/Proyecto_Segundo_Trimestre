@@ -45,25 +45,7 @@ class Reserva
      */
     private $Usuario;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $Desayuno;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $Comida;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $Cena;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $Gim_Spa;
+    
 
     /**
      * @ORM\Column(type="float")
@@ -147,58 +129,7 @@ class Reserva
         return $this;
     }
 
-    public function getDesayuno(): ?bool
-    {
-        return $this->Desayuno;
-    }
-
-    public function setDesayuno(bool $Desayuno): self
-    {
-        $this->Desayuno = $Desayuno;
-
-        return $this;
-    }
-
-    public function getComida(): ?bool
-    {
-        return $this->Comida;
-    }
-
-    public function setComida(bool $Comida): self
-    {
-        $this->Comida = $Comida;
-
-        return $this;
-    }
-
-    public function getCena(): ?bool
-    {
-        return $this->Cena;
-    }
-
-    public function setCena(bool $Cena): self
-    {
-        $this->Cena = $Cena;
-
-        return $this;
-    }
-
-    public function getGimSpa(): ?bool
-    {
-        return $this->Gim_Spa;
-    }
-
-    public function setGimSpa(bool $Gim_Spa): self
-    {
-        $this->Gim_Spa = $Gim_Spa;
-
-        return $this;
-    }
-
-    public function getPrecioFinal(): ?float
-    {
-        return $this->Precio_Final;
-    }
+    
 
     public function setPrecioFinal(float $Precio_Final): self
     {

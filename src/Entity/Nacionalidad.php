@@ -29,10 +29,7 @@ class Nacionalidad
      */
     private $usuarios;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Reserva::class, mappedBy="Nacionalidad")
-     */
-    private $reservas;
+    
 
     public function __construct()
     {
@@ -87,35 +84,7 @@ class Nacionalidad
         return $this;
     }
 
-    /**
-     * @return Collection|Reserva[]
-     */
-    public function getReservas(): Collection
-    {
-        return $this->reservas;
-    }
-
-    public function addReserva(Reserva $reserva): self
-    {
-        if (!$this->reservas->contains($reserva)) {
-            $this->reservas[] = $reserva;
-            $reserva->setNacionalidad($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReserva(Reserva $reserva): self
-    {
-        if ($this->reservas->removeElement($reserva)) {
-            // set the owning side to null (unless already changed)
-            if ($reserva->getNacionalidad() === $this) {
-                $reserva->setNacionalidad(null);
-            }
-        }
-
-        return $this;
-    }
+    
 
     public function __toString()
     {

@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ReservaController extends AbstractController
 {
     /**
-     * @Route("/reserva/{id}", name="reserva")
+     * @Route("/reserva/{id}/{fecha_inicio}/{fecha_fin}", name="reserva")
      */
     public function index(Request $request,$id): Response
     {

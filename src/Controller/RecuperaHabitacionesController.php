@@ -33,7 +33,7 @@ class RecuperaHabitacionesController extends AbstractController
         $tipo=$request->request->get('tipo');
         
 
-
+        
 
         $pagina=$request->request->get('pagina');
         //dd($request->request->get('pagina'));

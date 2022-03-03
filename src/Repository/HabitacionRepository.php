@@ -42,7 +42,7 @@ class HabitacionRepository extends ServiceEntityRepository
             SELECT habitacion.n_habitacion , habitacion.adultos,habitacion.menores,habitacion.descripcion,habitacion.camas,habitacion.temporada_alta,habitacion.temporada_media,habitacion.temporada_baja 
             FROM reserva 
             INNER JOIN habitacion ON habitacion.id = reserva.habitacion_id 
-            WHERE fecha_inicio>'${fecha_inicio}' OR fecha_fin<'${fecha_fin}' )a 
+            WHERE fecha_inicio>STR_TO_DATE('$fecha_inicio','%m/%d/%Y') OR fecha_fin<STR_TO_DATE('$fecha_fin','%m/%d/%Y') )a 
         
             ";
         
@@ -81,7 +81,7 @@ class HabitacionRepository extends ServiceEntityRepository
         SELECT habitacion.n_habitacion , habitacion.adultos,habitacion.menores,habitacion.descripcion,habitacion.camas,habitacion.temporada_alta,habitacion.temporada_media,habitacion.temporada_baja 
         FROM reserva 
         INNER JOIN habitacion ON habitacion.id = reserva.habitacion_id 
-        WHERE fecha_inicio>'${fecha_inicio}' OR fecha_fin<'${fecha_fin}' )a ";
+        WHERE fecha_inicio>STR_TO_DATE('$fecha_inicio','%m/%d/%Y') OR fecha_fin<STR_TO_DATE('$fecha_fin','%m/%d/%Y') )a ";
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery();
         $registros = $resultSet->fetchAll();
@@ -109,7 +109,7 @@ class HabitacionRepository extends ServiceEntityRepository
             SELECT habitacion.n_habitacion , habitacion.adultos,habitacion.menores,habitacion.descripcion,habitacion.camas,habitacion.temporada_alta,habitacion.temporada_media,habitacion.temporada_baja 
             FROM reserva 
             INNER JOIN habitacion ON habitacion.id = reserva.habitacion_id 
-            WHERE fecha_inicio>'${fecha_inicio}' OR fecha_fin<'${fecha_fin}' )a 
+            WHERE fecha_inicio>STR_TO_DATE('$fecha_inicio','%m/%d/%Y') OR fecha_fin<STR_TO_DATE('$fecha_fin','%m/%d/%Y') )a 
             ORDER BY n_habitacion 
             LIMIT 0,4";
             $stmt = $conn->prepare($sql);

@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    debugger
+    
     $.ajax({
         dataType:"json",
         type:"get",
@@ -8,12 +8,13 @@ $(document).ready(function()
         
         success:function(data)
         {
-            for(let i=0;i<data[0].length;i++)
+            debugger;
+            for(let i=0;i<data.length;i++)
             {
-                debugger;
+                
                 $("#select_tipo_habitaciones").append($("<option>",{
                     value:i,
-                    text:data[0][i].Nombre
+                    text:data[i].Nombre
                 }));
             }
             

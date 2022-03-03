@@ -27,9 +27,7 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         // redirect to some CRUD controller
-        $routeBuilder = $this->get(AdminUrlGenerator::class);
-
-        return $this->redirect($routeBuilder->setController(ReservaCrudController::class)->generateUrl());
+        
 
         // you can also redirect to different pages depending on the current user
        /*  if ('jane' === $this->getUser()->getUsername()) {
@@ -38,7 +36,7 @@ class DashboardController extends AbstractDashboardController
 
         // you can also render some template to display a proper Dashboard
         // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        return $this->render('some/path/my-dashboard.html.twig');
+        return $this->render('bundles/EasyAdminBundle/welcome.html.twig');
     }
 
     public function configureDashboard(): Dashboard
@@ -49,6 +47,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        yield MenuItem::linkToRoute("Pagina principal",'fa fa-users',"index");
         yield MenuItem::linkToDashboard('Inicio', 'fa fa-home');
         yield MenuItem::linkToCrud('Tipo', 'fa fa-star',TipoHabitacion::class);
         yield MenuItem::linkToCrud('Fotos', 'fa fa-camera',Fotos::class);
@@ -57,5 +56,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Reservas', 'fa fa-bell',Reserva::class);
         yield MenuItem::linkToCrud('Temporadas', 'fa fa-calendar',Temporada::class);
         yield MenuItem::linkToCrud('Usuarios', 'fa fa-users',Usuario::class);
+        yield MenuItem::linkToRoute("Alta Masiva",'fa fa-users',"index");
     }
 }

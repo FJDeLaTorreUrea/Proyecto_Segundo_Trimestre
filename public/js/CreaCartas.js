@@ -7,6 +7,29 @@
             ev.preventDefault();
             var fecha_inicio=$(".calendario1").val();
             var fecha_fin=$(".calendario2").val();
+
+            var fecha_inicio_sep=fecha_inicio.split("/");
+            console.log(fecha_inicio_sep);
+            var mes_inicio=fecha_inicio_sep[0];
+            var dia_inicio=fecha_inicio_sep[1];
+            var ano_inicio=fecha_inicio_sep[2];
+            var fecha_inicio_mod=dia_inicio+mes_inicio+ano_inicio;
+
+            var fecha_fin_sep=fecha_fin.split("/");
+            console.log(fecha_fin_sep);
+            var mes_fin=fecha_fin_sep[0];
+            var dia_fin=fecha_fin_sep[1];
+            var ano_fin=fecha_fin_sep[2];
+            var fecha_fin_mod=dia_fin+mes_fin+ano_fin;
+            
+
+
+
+
+
+
+
+
             var adultos=$("#adultos option:selected").text();
             var menores=$("#menores option:selected").text();
             var tipo=$("#select_tipo_habitaciones option:selected").text();
@@ -42,7 +65,6 @@
                     $("#spinner").css({
                         "display":"none"
                     })
-                    alert("hola");
                     var paginas=data[1].substr(-1);
 
                     for(let i=0;i<paginas;i++)
@@ -76,7 +98,12 @@
                             {
                                 let contenedor=$("#contenedor_habitaciones");
                                 let fila=$("<div class='row'></div>");
-                                let carta=$("<div class='card mb-12' style='max-width:800px; min-width:800px;'></div>");
+                                let carta=$("<div class='card mb-12' style='max-width:800px; min-width:800px; cursor:pointer; '></div>");
+                                carta.on("click",function()
+                                {
+                                    
+                                    $(location).attr('href',"/reserva/"+data[0][i].n_habitacion+"/"+fecha_inicio_mod+"/"+fecha_fin_mod);
+                                })
                                 let gut=$("<div class='row no-gutters'></div>")
                                 let columImagen=$("<div class='col-md-4'></div>")
                                 let imagen=$("<img width=265.99px  height=182.4px src='../imagenes/"+defineImagen()+"' class='imagen'></img>")
@@ -166,7 +193,7 @@
                                 
                                 let columContenido=$("<div class='col-md-6'></div>")
                                 let bodycarta=$("<div class='card-body'></div>")
-                                let titulocarta=$("<h5 class='card-title'>"+defineTipo()+"</h5>")
+                                let titulocarta=$("<h5 class='card-title'>"+defineTipo()+" nº:"+data[0][i].n_habitacion+"</h5>")
                                 let textocarta=$("<p class='card-text'>"+data[0][i].descripcion+"</br> Adultos: "+data[0][i].adultos+" &nbsp; Menores: "+data[0][i].menores+"&nbsp;&nbsp;&nbsp;<span id='precio'><h5> desde "+precioInsertado+" euros</h5></span></p>")
                                 $(".card-text").css({
                                     "padding-right":"300px"

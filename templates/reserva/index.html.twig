@@ -3,7 +3,7 @@
 {% block title %}Reservar{% endblock %}
 
 {% block body %}
-<section class="site-hero inner-page overlay" style="background-image: url(imagenes/hero_4.jpg)" data-stellar-background-ratio="0.5">
+<section class="site-hero inner-page overlay" style="background-image: url({{asset('imagenes/Fondo_pagina.jpg')}})" data-stellar-background-ratio="0.5">
       <div class="container">
         <div class="row site-hero-inner justify-content-center align-items-center">
           <div class="col-md-10 text-center" data-aos="fade">
@@ -24,97 +24,111 @@
 
     
         
-        {# {{form_row(form.Fecha_Inicio)}}
-        {{form_row(form.Fecha_Fin)}}
-        {{form_row(form.Adultos)}}
-        {{form_row(form.Menores)}}
-        {{form_row(form.Desayuno)}}
-        {{form_row(form.Comida)}}
-        {{form_row(form.Cena)}}
-        {{form_row(form.Gim_Spa)}}
-    {{form_end(form)}} #}
-    
+        
     <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-            {{form_start(form, {'attr':{'class':'bg-white p-md-5 p-4 mb-5 border'}})}}
             
+            <form class="bg-white p-md-5 p-4 mb-5 border">
+            <h2>Datos de reserva</h2>
+            <label>Id usuario:</label>
+            <input type="text" id="id_usuario" class="form-control" value="{{app.user.id}}" readonly>
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="name">Numero de Habitacion:</label>
-                  {{form_label(form.Habitacion," ")}}
-                  {{form_widget(form.Habitacion,{'attr':{'class':'form-control'}})}}
+                  <input type="text" class="form-control" id="Numero_habitacion" readonly>
+                  
                 </div>
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="phone">Tipo:</label>
-                  <input type="text" id="phone" class="form-control ">
+                  <input type="text" id="tipo" class="form-control "readonly>
                 </div>
               </div>
           
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="email">Fecha de Inicio:</label>
-                  {{form_label(form.Fecha_Inicio," ")}}
-                  {{form_widget(form.Fecha_Inicio,{'attr':{'class':'calendario1'}})}}
+                  
+                  
+                  <input class="form-control" id="fecha_inicio" readonly>
                 </div>
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="email">Fecha  de Salida:</label>
-                  {{form_label(form.Fecha_Fin," ")}}
-                  {{form_widget(form.Fecha_Fin,{'attr':{'class':'calendario2'}})}}
+    
+                  <input class="form-control" id="fecha_fin" readonly>
                 </div>
               </div>
+            
 
               
 
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label for="adults" class="font-weight-bold text-black">Adultos</label>
-                  {{form_label(form.Adultos," ")}}
-                  {{form_widget(form.Adultos,{'attr':{'class':'form-control'}})}}
+                  
+                  <input class="form-control" id="adultos" readonly>
                   
                 </div>
                 <div class="col-md-6 form-group">
                   <label for="children" class="font-weight-bold text-black">Niños</label>
-                  {{form_label(form.Menores," ")}}
-                  {{form_widget(form.Menores,{'attr':{'class':'form-control'}})}}
+                  <input class="form-control" id="menores" readonly>
                 </div>
               </div>
+            </form>
 
 
-              <div class="row">
-                <div class="form-check col-md-3">
-                
-                  {{form_row(form.Desayuno,{'attr':{'class':'form-check-input col-md-3'}})}}
-                 
-                  
-                </div>
-                <div class="form-check col-md-3">
-                      {{form_row(form.Comida,{'attr':{'class':'form-check-input col-md-3'}})}}
-                  
-                </div>
-                <div class="form-check col-md-3">
-                      {{form_row(form.Cena,{'attr':{'class':'form-check-input col-md-3'}})}}
-                </div>
-                <div class="form-check col-md-3">
-                      {{form_row(form.Gim_Spa,{'attr':{'class':'form-check-input col-md-3'}})}}
-                </div>
-                
-              </div>
+              
 
 
 
               
 
               
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="submit" value="Reserve Now" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
-                </div>
-              </div>
-            {{form_end(form)}}
+              
+           
 
           </div>
+          <div class="col-md-5" data-aos="fade-up" data-aos-delay="100">
+          <form class="bg-white p-md-5 p-4 mb-5 border">
+            <h2>Precio Final: <span id="precio"></span></h2>
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <label class="text-black font-weight-bold" for="name">Numero de Tarjeta:</label>
+                  <input type="text" class="form-control" id="Numero_tarjeta" required>
+                  
+                </div>
+                
+              </div>
+          
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <label class="text-black font-weight-bold" for="email">Titular de la tarjeta:</label>
+                  
+                  
+                  <input class="form-control" id="Titular_tarjeta" required>
+                </div>
+                
+              </div>
+            
+
+              
+
+              <div class="row">
+                <div class="col-md-8 form-group">
+                  <label for="adults" class="font-weight-bold text-black">Codigo de seguridad:</label>
+                  
+                  <input class="form-control" id="Codigo_tarjeta" required>
+                  
+                </div>
+                
+              </div>
+              <input type="submit" class="btn btn-lg btn-primary" id="reservar" value="reservar y pagar">
+            </form>
+              
+
+          </div>
+          
          
         </div>
       </div>
@@ -129,4 +143,6 @@
 {% block javascripts%}
 {{parent()}}
 <script src="{{asset('js/configurar_fecha.js')}}"></script>
+<script src="{{asset('js/rellenaDatosHabitacion.js')}}"></script>
+
 {% endblock %}
